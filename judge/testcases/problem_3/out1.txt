@@ -1,0 +1,6 @@
+Integer value = 17
+Floating point value = 3.508
+Character value = W
+
+
+
