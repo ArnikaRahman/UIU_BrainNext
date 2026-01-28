@@ -1,0 +1,268 @@
+*{ box-sizing:border-box; }
+
+/* ✅ FIX: stable full-page background (no “2-layer” look) */
+html, body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: auto;
+  background-color: #070b11; /* same base on html + body */
+}
+
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:#eaf2ff;
+
+  /* ✅ Uniform premium background (no hard fade at bottom) */
+  background:
+    linear-gradient(180deg, #070b11 0%, #070b11 100%),
+    radial-gradient(circle at 30% 15%, rgba(70,140,255,.10), transparent 70%),
+    radial-gradient(circle at 80% 20%, rgba(0,255,200,.08), transparent 75%);
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* layout */
+.container{ width:min(1100px, 92vw); margin:22px auto; }
+.grid{ display:grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap:14px; }
+.col-6{ grid-column: span 6; }
+.col-12{ grid-column: span 12; }
+@media (max-width: 900px){ .col-6{ grid-column: span 12; } }
+
+/* =========================
+   Layout helpers
+   ========================= */
+.row{ display:flex; gap:14px; flex-wrap:wrap; }
+.row > *{ flex:1 1 0; min-width:260px; }
+
+.sp-6{ height:6px; }
+.sp-10{ height:10px; }
+.sp-14{ height:14px; }
+.sp-18{ height:18px; }
+
+/* reusable inline “pills” used across pages */
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  white-space:nowrap;
+}
+.pill-block{
+  display:block;
+  width:100%;
+  padding:14px 16px;
+  border-radius:16px;
+  white-space:normal;
+}
+.pill-ac{ border-color:rgba(0,180,90,.35); background:rgba(0,180,90,.12); }
+.pill-wa{ border-color:rgba(255,180,0,.35); background:rgba(255,180,0,.10); }
+.pill-bad{ border-color:rgba(255,80,80,.35); background:rgba(255,80,80,.10); }
+.pill-manual{ border-color:rgba(120,160,255,.35); background:rgba(120,160,255,.10); }
+
+.lang-pill{ display:inline-flex; align-items:center; padding:6px 10px; border-radius:999px; font-weight:900; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); white-space:nowrap; }
+.smallmono{ font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; font-size:12px; }
+.title-strong{ font-weight:900; }
+
+/* form “filters” grid (used on Problems page + others) */
+.filters{
+  display:grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap:10px;
+  align-items:end;
+}
+@media(max-width: 900px){ .filters{ grid-template-columns: repeat(6, minmax(0,1fr)); } }
+@media(max-width: 620px){ .filters{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.fcol-2{ grid-column: span 2; }
+.fcol-3{ grid-column: span 3; }
+.fcol-4{ grid-column: span 4; }
+.fcol-6{ grid-column: span 6; }
+.fcol-12{ grid-column: span 12; }
+.filters input,.filters select{ width:100%; box-sizing:border-box; }
+
+/* cards/nav/badges */
+.card{
+  background: rgba(10, 18, 30, .55);
+  border:1px solid rgba(90,130,190,.22);
+  border-radius:22px;
+  padding:18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.nav{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:14px; padding:10px 12px; border-radius:20px;
+  border:1px solid rgba(90,130,190,.18);
+  background: rgba(10, 18, 30, .35);
+}
+.nav .left{ display:flex; align-items:center; gap:10px; }
+
+.badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:8px 12px; border-radius:999px; text-decoration:none;
+  font-weight:800; font-size:13px; color:#eaf2ff;
+  border:1px solid rgba(120, 170, 255, .35);
+  background: rgba(13, 27, 45, .55);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.badge:hover{
+  transform: translateY(-1px);
+  border-color: rgba(160, 205, 255, .9);
+  box-shadow: 0 12px 26px rgba(0,0,0,.28), 0 0 0 3px rgba(70,140,255,.10);
+  background: rgba(15, 35, 60, .70);
+}
+
+h1,h2,h3{ margin:0 0 10px 0; }
+.muted{ color: rgba(220,235,255,.72); }
+
+/* alerts */
+.alert{
+  padding:12px 14px; border-radius:16px; margin:12px 0;
+  border:1px solid rgba(120,170,255,.25);
+  background: rgba(13, 27, 45, .55);
+}
+.alert.err{ border-color: rgba(255,120,120,.35); background: rgba(50, 10, 12, .35); }
+.alert.ok{ border-color: rgba(120,255,190,.35); background: rgba(10, 40, 25, .35); }
+
+/* forms */
+.label{ display:block; font-size:13px; font-weight:800; margin-bottom:6px; color: rgba(230,245,255,.85); }
+input, select, textarea{
+  width:100%;
+  padding:12px 12px;
+  border-radius:14px;
+  border:1px solid rgba(120, 170, 255, .22);
+  background: rgba(6, 10, 16, .55);
+  color:#eaf2ff;
+  outline:none;
+}
+textarea{ min-height:180px; resize:vertical; }
+input:focus, select:focus, textarea:focus{
+  border-color: rgba(160, 205, 255, .85);
+  box-shadow: 0 0 0 3px rgba(70,140,255,.12);
+}
+.btn-primary{
+  width:100%;
+  padding:12px 14px;
+  border-radius:16px;
+  font-weight:900;
+  color:#eaf2ff;
+  background: rgba(60, 140, 255, .30);
+  border:1px solid rgba(160, 205, 255, .55);
+  box-shadow: 0 14px 32px rgba(0,0,0,.30);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.btn-primary:hover{
+  transform: translateY(-1px);
+  background: rgba(60, 140, 255, .38);
+  border-color: rgba(200, 230, 255, .95);
+  box-shadow: 0 18px 40px rgba(0,0,0,.38), 0 0 0 3px rgba(70,140,255,.12);
+}
+
+/* tables */
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 10px; /* vertical row spacing */
+  table-layout:fixed;    /* ✅ stable column widths (prevents “moving gaps”) */
+}
+.table thead th{
+  text-align:left;
+  font-weight:900;
+  padding:10px 12px;
+  vertical-align:middle;
+}
+.table tbody tr{ background: rgba(13, 27, 45, .45); }
+.table tbody td{
+  padding:12px;
+  border-top:1px solid rgba(90,130,190,.18);
+  border-bottom:1px solid rgba(90,130,190,.18);
+  vertical-align:middle;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+/* ✅ Fix: keep Remove button at top-right (not floating in middle) */
+.table td.row-actions{
+  vertical-align: top;
+  padding-top: 18px;   /* adjust 14-22 if you want */
+  text-align: right;
+  width: 110px;
+}
+.table th, .table td{ min-width:0; }
+.table tbody tr td:first-child{
+  border-left:1px solid rgba(90,130,190,.18);
+  border-top-left-radius:16px; border-bottom-left-radius:16px;
+}
+.table tbody tr td:last-child{
+  border-right:1px solid rgba(90,130,190,.18);
+  border-top-right-radius:16px; border-bottom-right-radius:16px;
+}
+
+/* top action boxes */
+.top-actions{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:12px;
+  margin-bottom:14px;
+}
+.top-box{
+  border-radius:18px;
+  border:1px solid rgba(90,130,190,.28);
+  background: rgba(10, 18, 30, .35);
+  padding:12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+.top-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 14px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:900;
+  font-size:13px;
+  letter-spacing:.2px;
+  color:#eaf2ff;
+  background: rgba(60, 140, 255, .22);
+  border:1px solid rgba(140, 190, 255, .55);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.top-box:hover .top-btn{
+  transform: translateY(-1px);
+  background: rgba(60, 140, 255, .30);
+  border-color: rgba(180, 220, 255, .95);
+  box-shadow: 0 14px 30px rgba(0,0,0,.30), 0 0 0 3px rgba(70,140,255,.12);
+}
+@media (max-width: 900px){ .top-actions{ grid-template-columns:1fr; } }
+
+/* login */
+.auth-page{ min-height:100vh; display:flex; align-items:center; justify-content:center; padding:22px; }
+.auth-card{
+  width:min(420px, 92vw);
+  background: rgba(10, 18, 30, .62);
+  border:1px solid rgba(90,130,190,.22);
+  border-radius:26px;
+  padding:22px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.40);
+}
+.auth-pill{
+  display:inline-flex; align-items:center;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:900;
+  border:1px solid rgba(120,170,255,.35);
+  background: rgba(13, 27, 45, .55);
+}
+.auth-title{ font-size:26px; font-weight:950; margin:10px 0 0 0; }
+.auth-subtitle{ margin:6px 0 14px 0; }
+
+
+
+
+
+
